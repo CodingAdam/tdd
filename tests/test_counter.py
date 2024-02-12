@@ -40,7 +40,7 @@ class CounterTest(TestCase):
         self.assertEqual(result.status_code, status.HTTP_409_CONFLICT)
 
     def test_update_a_counter_null(self):
-        """It should return an error for no counter found"""
+        """It should return an error trying to update a null counter"""
         result = self.client.put('/counters/null')
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -72,7 +72,7 @@ class CounterTest(TestCase):
         self.assertEqual(baseline, 1)
 
     def test_get_a_counter_null(self):
-        """It should update a counter"""
+        """It should return an error for getting a null counter"""
         result = self.client.get('/counters/null1')
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
 
