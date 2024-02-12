@@ -107,3 +107,9 @@ class CounterTest(TestCase):
         # Check if counter doesn't exist
         result = self.client.get('/counters/delete')
         self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_a_counter_null(self):
+        """It should return an error trying to delete a null counter"""
+        result = self.client.delete('/counters/null2')
+        self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
+
