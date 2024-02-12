@@ -21,11 +21,11 @@ from src.counter import app
 
 class CounterTest(TestCase):
 
-
     def setUp(self):
         self.client = app.test_client()
 
     """Counter tests"""
+
     def test_create_a_counter(self):
         """It should create a counter"""
         client = app.test_client()
@@ -91,3 +91,19 @@ class CounterTest(TestCase):
         # Check the counter value of baseline
         baseline = baseline.json['get']
         self.assertEqual(baseline, 0)
+
+    def test_delete_a_counter(self):
+        """It should delete a counter"""
+        # Call to create a counter
+        result = self.client.post('/counters/delete')
+
+        # Check for successful return code
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+
+        # Delete counter
+        result = self.client.delete('/counters/delete')
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+
+        # Check if counter doesn't exist
+        result = self.client.get('/counters/delete')
+        self.assertEqual(result.status_code, status.HTTP_404_NOT_FOUND)
