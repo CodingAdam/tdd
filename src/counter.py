@@ -1,3 +1,5 @@
+"""Contains methods accessing counters."""
+
 from flask import Flask
 
 from src import status
